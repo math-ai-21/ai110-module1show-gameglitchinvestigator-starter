@@ -7,16 +7,30 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - What did the game look like the first time you ran it?
 - List at least two concrete bugs you noticed at the start  
   (for example: "the hints were backwards").
-
+When I first ran the game, I noticed that it was not working as intended. First, the hints were backwards: after it told me to go lower, I guessed the lowest possible number, 1, but it still told me to go lower. This suggested that the “Go LOWER!” and “Go HIGHER!” messages were switched. Also, after finishing one round, I noticed that clicking “New Game” displayed “Game over. Start a new game to try again.” but did not let me start a new game.
+So the two main bugs are:
+-the hints were switched
+-the "New Game" button wasn't working
 **Bug Reproduction Log**
 
 Document at least 3 bugs you found. Add rows as needed.
 
-| Input | Expected Behavior | Actual Behavior | Console Output / Error |
-|-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
-| | | | |
+| Input        | Expected Behavior | Actual Behavior    | Console Output / Error | Suspected Code Location |
+|--------------|-------------------|--------------------|------------------------|-------------------------|
+|   10         | "Go HIGHER!"      |"Go LOWER!"         |    none                | app.py, check_guess()   |
+|(secret > 10) |                   |                    |                        |                         |
+|   -10        | It should inform  |Accepts -10 and says|    none                | app.py, parse_guess()   |
+|              | the user that it  |"Go LOWER!"         |                        |                         |
+|              | is out of range.  |                    |                        |                         |
+|              |                   |                    |                        |                         |
+|   110        |It should inform   |Accepts 110 and     |    none                | app.py, check_guess,    |
+|              |the user that it   |alternates between  |                        | parse_guess()           |
+|              |is out of range.   |"Go LOWER!" and     |                        |                         |
+|              |                   |"Go HIGHER!" on     |                        |                         |
+|              |                   |successive guesses. |                        |                         |
+|  "twenty"    | It should reject  |It uses an attempt. | "That is not a number."| app.py, if submit:      |     
+|              | the input and not |                    |                        |                         |
+|              | count it.         |                    |                        |                         |
 
 ---
 
