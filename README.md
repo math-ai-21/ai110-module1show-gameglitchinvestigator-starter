@@ -25,19 +25,37 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- [x] Describe the game's purpose.
+
+The game’s purpose is to let the player guess a randomly chosen whole number within the selected difficulty’s range. It gives higher or lower hints after incorrect guesses and tracks attempts and score. The player wins by guessing correctly before running out of attempts.
+- [x] Detail which bugs you found.
+- The higher and lower hints were backwards.
+- Out-of-range guesses were accepted.
+- The secret was converted to a string on even attempts, causing inconsistent comparisons.
+- Some incorrect “Too High” guesses earned points.
+- The attempt counter started at 1 before any guesses.
+- “New Game” did not fully reset the game.
+- Switching difficulty kept the previous secret, even when it was outside the new range.
+- Decimal inputs were truncated into integers.
+
+- [x] Explain what fixes you applied.
+
+I moved the game’s logic functions into logic_utils.py and updated app.py to use them. I corrected the hints, kept the comparisons numeric, added range validation, and rejected decimal inputs. I started attempts at 0 and made only valid guesses take up attempts. I made both incorrect outcomes deduct 5 points. I reset the secret, attempts, score, status, and history when starting a new game or changing difficulty. 
 
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. Game automatically starts in Normal mode
+2. User enters the number 20
+3. The hint states "Go HIGHER!"
+4. User enters 100
+5. The hint states "Go LOWER!"
+6. User enters 86
+7. The game ends after the correct guess. It states "Correct!" and "You won! The secret was 86. Final score: 60"
+8. User changes the difficulty to "Hard"
+9. The game generates a secret within the Hard range of 1–50. Attempts used reset to 0, leaving 5 attempts available, and the score and history reset.
+10. User plays game until they get the correct guess or run out of attempts.
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
