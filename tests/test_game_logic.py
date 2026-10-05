@@ -28,4 +28,26 @@ def test_negative_guess_is_rejected():
     assert value is None
     assert "Out of range" in err
 
+#New test cases generated to cover edge-cases, following Claude's suggestions.
+def test_decimal_guess_is_rejected():
+    # A decimal must be rejected, not truncated to an int
+    ok, value, err = parse_guess("3.7", 1, 100)
+    assert ok is False
+    assert value is None
+    assert "not a number" in err
+
+def test_extremely_large_guess_is_rejected():
+    # A huge integer is far above the highest valid guess
+    ok, value, err = parse_guess("99999999999999999999", 1, 100)
+    assert ok is False
+    assert value is None
+    assert "Out of range" in err
+
+def test_non_numeric_guess_is_rejected():
+    # Letters are not a number at all
+    ok, value, err = parse_guess("abc", 1, 100)
+    assert ok is False
+    assert value is None
+    assert "not a number" in err
+
 

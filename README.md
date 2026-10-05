@@ -63,9 +63,11 @@ Describe your fixed game in numbered steps so a reader can follow along without 
 
 ```
 # Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+# tests/test_game_logic.py ........                                                                                             [100%]
+
+========================================================= 8 passed in 0.07s =========================================================
 ```
+
 
 ## 🚀 Stretch Features
 
